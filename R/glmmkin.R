@@ -143,7 +143,7 @@ glmmkin.ai <- function(fit0, kins, group.idx, tau = rep(0, length(kins)+length(g
 		for(i in 1:q2) {
 		        if(idxtau[i] <= ng) tau[idxtau[i]] <- max(0, tau0[idxtau[i]] + tau0[idxtau[i]]^2 * (sum((PY/sqrtW)[group.idx[[idxtau[i]]]]^2) - sum((diag(P)/sqrtW^2)[group.idx[[idxtau[i]]]]))/n)
 			else {
-	        	        PAPY <- crossprod(P, crossprod(kins[[idxtau[i]-ng]], PY))
+	        	        PAPY <- crossprod(P, t(crossprod(kins[[idxtau[i]-ng]], t(PY))))
 				tau[idxtau[i]] <- max(0, tau0[idxtau[i]] + tau0[idxtau[i]]^2 * (crossprod(Y, PAPY) - sum(P*kins[[idxtau[i]-ng]]))/n)
 			}
 		}
