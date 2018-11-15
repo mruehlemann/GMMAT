@@ -25,8 +25,8 @@ glmmkin <- function(fixed, data = parent.frame(), kins, groups = NULL, family = 
 	if(method.optim != "Brent" && class(kins) == "matrix") kins <- list(kins1 = kins)
 	fit0 <- glm(formula = fixed, data = data, family = family, ...)
 	idx <- match(rownames(model.frame(formula = fixed, data = data, na.action = na.omit)), rownames(model.frame(formula = fixed, data = data, na.action = na.pass)))
-	if(class(kins) == "matrix") kins <- kins[idx, idx]
-	else {
+	if(class(kins) == "matrix") { kins <- kins[idx, idx]
+	} else {
 	        for(i in 1:length(kins)) kins[[i]] <- kins[[i]][idx, idx]
 	}
 	group.id <- if(is.null(groups)) rep(1, length(idx)) else data[idx, groups]
